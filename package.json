@@ -39,5 +39,17 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "nodemon": "^1.17.2"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daydreammsp/grimlund_gas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daydreammsp/grimlund_gas/issues"
+  },
+  "homepage": "https://github.com/daydreammsp/grimlund_gas#readme"
 }
