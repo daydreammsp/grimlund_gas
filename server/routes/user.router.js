@@ -8,6 +8,7 @@ const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
+  console.log('registar made it', req.body)
   // Send back user object from database
   res.send(req.user);
 });
@@ -16,7 +17,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
-  console.log('req: ', req.body);
   
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
@@ -41,5 +41,7 @@ router.get('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
+
+
 
 module.exports = router;

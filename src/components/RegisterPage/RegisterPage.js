@@ -21,6 +21,7 @@ class RegisterPage extends Component {
         message: 'Choose a username and password!',
       });
     } else {
+
       const body = {
         username: this.state.username,
         password: this.state.password,
