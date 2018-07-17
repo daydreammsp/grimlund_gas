@@ -1,14 +1,12 @@
-CREATE TABLE "person" (
-	"user_id" serial NOT NULL,
-	"username" varchar NOT NULL UNIQUE,
-	"password" varchar NOT NULL UNIQUE,
-	CONSTRAINT person_pk PRIMARY KEY ("user_id")
-) WITH (
-  OIDS=FALSE
+CREATE TABLE person (
+
+    id SERIAL PRIMARY KEY,
+
+    username VARCHAR (80) UNIQUE NOT NULL,
+
+    password VARCHAR (1000) NOT NULL
+
 );
-
-
-
 CREATE TABLE "cars" (
 	"car_id" serial NOT NULL UNIQUE,
 	"car_model" varchar,
@@ -62,7 +60,7 @@ CREATE TABLE "maintenance" (
 
 
 
-ALTER TABLE "drivers" ADD CONSTRAINT "drivers_fk0" FOREIGN KEY ("driver_id") REFERENCES "person"("user_id");
+ALTER TABLE "drivers" ADD CONSTRAINT "drivers_fk0" FOREIGN KEY ("driver_id") REFERENCES "person"("id");
 ALTER TABLE "drivers" ADD CONSTRAINT "drivers_fk1" FOREIGN KEY ("car_id") REFERENCES "cars"("car_id");
 
 ALTER TABLE "transactions" ADD CONSTRAINT "transactions_fk0" FOREIGN KEY ("driver_id") REFERENCES "drivers"("id");
