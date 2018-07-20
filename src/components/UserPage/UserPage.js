@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Nav from '../../components/Nav/Nav';
-
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
-
+import Button from 'react-bootstrap/lib/Button';
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
 class UserPage extends Component {
+  state={
+    model:'',
+    make:'',
+    year:'',
+    miles:''
+  }
+  carInput = (inputText) => {
+    return (event) => {
+      this.setState({
+        [inputText]: event.target.value
+      });
+    }
+  }
+  carSubmit = ()=>{
+
+  }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
@@ -38,11 +52,32 @@ class UserPage extends Component {
           >
             Welcome, { this.props.user.userName }!
           </h1>
-          <button
+          <h3>car</h3>
+          <input 
+          placeholder="model"
+          onChange={this.carInput('model')}
+          />
+          <input 
+          placeholder="make"
+          onChange={this.carInput('make')}
+          />
+          <input 
+          placeholder="year"
+          onChange={this.carInput('year')}
+          />
+          <input 
+          placeholder="starting miles"
+          onChange={this.carInput('miles')}
+          />
+          <Button
+          onClick={this.carSubmit}
+          >submit</Button>
+
+          <Button
             onClick={this.logout}
           >
             Log Out
-          </button>
+          </Button>
         </div>
       );
     }
