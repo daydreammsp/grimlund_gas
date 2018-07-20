@@ -24,7 +24,19 @@ class UserPage extends Component {
     }
   }
   carSubmit = ()=>{
-
+    this.props.dispatch({
+      type: 'CAR_POST',
+      payload: {model:this.state.model,
+                make:this.state.make,
+                year:this.state.year,
+                miles:this.state.miles}
+    });
+    // this.setState({
+    //   model: '',
+    //   make: '',
+    //   year: '',
+    //   miles: ''
+    // })
   }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
