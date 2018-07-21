@@ -47,6 +47,10 @@ if(req.isAuthenticated()){//in order to post an item, user must be signed in
         res.sendStatus(403)
     };//end if/else
 });//end router.post
-            
+    
+
+router.post('/transactionpost', (req, res) => {
+    console.log(req.body)
+});
 
 module.exports = router;
