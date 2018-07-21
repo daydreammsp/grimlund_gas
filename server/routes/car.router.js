@@ -30,7 +30,7 @@ if(req.isAuthenticated()){//in order to post an item, user must be signed in
              let queryText2 = `INSERT INTO drivers ("driver_id", "car_id") VALUES ($1,$2);`;
              await client.query(queryText2, [userId, carId])
              await client.query('COMMIT');
-                // res.send()
+                res.send('ok')
             } catch (error) {
                 console.log('ROLLBACK', error);
                 await client.query('ROLLBACK');

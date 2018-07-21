@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../components/Nav/Nav';
-import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
+import { USER_ACTIONS } from '../../../redux/actions/userActions';
+
 import Button from 'react-bootstrap/lib/Button';
-import AddNewCar from './AddNewCar/AddNewCar';
 
 const mapStateToProps = state => ({
   user: state.user
 });
 
-class UserPage extends Component {
+class AddNewCar extends Component {
   state={
     model:'',
     make:'',
@@ -24,22 +22,22 @@ class UserPage extends Component {
       });
     }
   }
-  // carSubmit = ()=>{
-  //   this.props.dispatch({
-  //     type: 'CAR_POST',
-  //     payload: {model:this.state.model,
-  //               make:this.state.make,
-  //               year:this.state.year,
-  //               miles:this.state.miles,
-  //               userId:this.props.user.userId}
-  //   });
-  //   this.setState({
-  //     model: '',
-  //     make: '',
-  //     year: '',
-  //     miles: ''
-  //   })
-  // }
+  carSubmit = ()=>{
+    this.props.dispatch({
+      type: 'CAR_POST',
+      payload: {model:this.state.model,
+                make:this.state.make,
+                year:this.state.year,
+                miles:this.state.miles,
+                userId:this.props.user.userId}
+    });
+    this.setState({
+      model: '',
+      make: '',
+      year: '',
+      miles: ''
+    })
+  }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     
@@ -51,10 +49,10 @@ class UserPage extends Component {
     }
   }
 
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
-  }
+//   logout = () => {
+//     this.props.dispatch(triggerLogout());
+//     // this.props.history.push('home');
+//   }
 
   render() {
     let content = null;
@@ -62,12 +60,8 @@ class UserPage extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <h1
-            id="welcome"
-          >
-            Welcome, { this.props.user.userName }!
-          </h1>
-          {/* <h3> add new car</h3>
+          
+          <h3> add new car</h3>
           <input 
           placeholder="model"
           onChange={this.carInput('model')}
@@ -86,20 +80,14 @@ class UserPage extends Component {
           />
           <Button
           onClick={this.carSubmit}
-          >submit</Button> */}
-          <AddNewCar/>
-          <Button
-            onClick={this.logout}
-          >
-            Log Out
-          </Button>
+          >submit</Button>
         </div>
       );
     }
 
     return (
       <div>
-        <Nav />
+       
         { content }
       </div>
     );
@@ -107,5 +95,5 @@ class UserPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(AddNewCar);
 
