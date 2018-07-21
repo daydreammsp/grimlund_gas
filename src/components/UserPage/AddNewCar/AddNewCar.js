@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
-
 import Button from 'react-bootstrap/lib/Button';
 
 const mapStateToProps = state => ({
@@ -49,10 +48,6 @@ class AddNewCar extends Component {
     }
   }
 
-//   logout = () => {
-//     this.props.dispatch(triggerLogout());
-//     // this.props.history.push('home');
-//   }
 
   render() {
     let content = null;

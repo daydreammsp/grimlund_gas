@@ -12,34 +12,34 @@ const mapStateToProps = state => ({
 
 class UserPage extends Component {
   state={
-    model:'',
-    make:'',
-    year:'',
-    miles:''
+    city:'',
+    state:'',
+    milage:'',
+    gallons_purchased:''
   }
-  carInput = (inputText) => {
+  transactionInput = (inputText) => {
     return (event) => {
       this.setState({
         [inputText]: event.target.value
       });
     }
   }
-  // carSubmit = ()=>{
-  //   this.props.dispatch({
-  //     type: 'CAR_POST',
-  //     payload: {model:this.state.model,
-  //               make:this.state.make,
-  //               year:this.state.year,
-  //               miles:this.state.miles,
-  //               userId:this.props.user.userId}
-  //   });
-  //   this.setState({
-  //     model: '',
-  //     make: '',
-  //     year: '',
-  //     miles: ''
-  //   })
-  // }
+  transactionSubmit = () => { 
+    this.props.dispatch({
+      type: 'TRANSACTION_POST',
+      payload: {city:this.state.city,
+                state:this.state.state,
+                milage:this.state.milage,
+                gallons_purchased:this.state.gallons_purchased,
+                userId:this.props.user.userId}
+    });
+    this.setState({
+      city: '',
+      state: '',
+      milage: '',
+      gallons_purchased: ''
+    })
+  }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     
@@ -67,26 +67,28 @@ class UserPage extends Component {
           >
             Welcome, { this.props.user.userName }!
           </h1>
-          {/* <h3> add new car</h3>
-          <input 
-          placeholder="model"
-          onChange={this.carInput('model')}
+          <h3>Transaction</h3>
+          <input
+          placeholder="city"
+          onChange={this.transactionInput('city')}
           />
-          <input 
-          placeholder="make"
-          onChange={this.carInput('make')}
+          <input
+          placeholder="state"
+          onChange={this.transactionInput('state')}
           />
-          <input 
-          placeholder="year"
-          onChange={this.carInput('year')}
+          <input
+          placeholder="milage"
+          onChange={this.transactionInput('milage')}
           />
-          <input 
-          placeholder="starting miles"
-          onChange={this.carInput('miles')}
+          <input
+          placeholder="gallons_purchased"
+          onChange={this.transactionInput('gallons_purchased')}
           />
           <Button
-          onClick={this.carSubmit}
-          >submit</Button> */}
+          onClick={this.transactionSubmit}
+          >
+            Submit
+            </Button>
           <AddNewCar/>
           <Button
             onClick={this.logout}
