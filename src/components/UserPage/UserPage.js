@@ -6,7 +6,7 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 import Button from 'react-bootstrap/lib/Button';
 
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.user
 });
 
 class UserPage extends Component {
@@ -29,17 +29,19 @@ class UserPage extends Component {
       payload: {model:this.state.model,
                 make:this.state.make,
                 year:this.state.year,
-                miles:this.state.miles}
+                miles:this.state.miles,
+                userId:this.props.user.userId}
     });
-    // this.setState({
-    //   model: '',
-    //   make: '',
-    //   year: '',
-    //   miles: ''
-    // })
+    this.setState({
+      model: '',
+      make: '',
+      year: '',
+      miles: ''
+    })
   }
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    
   }
 
   componentDidUpdate() {
@@ -64,7 +66,7 @@ class UserPage extends Component {
           >
             Welcome, { this.props.user.userName }!
           </h1>
-          <h3>car</h3>
+          <h3> add new car</h3>
           <input 
           placeholder="model"
           onChange={this.carInput('model')}
