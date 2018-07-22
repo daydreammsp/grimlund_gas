@@ -1,6 +1,18 @@
 import { call,put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
+function* driverGet(action) {
+   console.log(action.payload)
+    try {
+         let driverId = yield call(axios.post, '/api/car/driverId', action.payload);
+        yield put({
+            type: 'DRIVER_ID',
+            payload: driverId.data
+            
+        })
+    } catch (error) {}
+  }
+
 function* carPost(action) {
     console.log('car saga', action.payload)
     try {
@@ -28,6 +40,7 @@ function* carPost(action) {
   function* carSaga() {
     yield takeEvery('CAR_POST', carPost);
     yield takeEvery('TRANSACTION_POST', transactionPost);
+    yield takeEvery('DRIVER_GET', driverGet);
     
 }
 export default carSaga;

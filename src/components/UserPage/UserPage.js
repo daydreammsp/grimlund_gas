@@ -7,7 +7,8 @@ import Button from 'react-bootstrap/lib/Button';
 import AddNewCar from './AddNewCar/AddNewCar';
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  driverId: state.driverIdGetReducer
 });
 
 class UserPage extends Component {
@@ -46,11 +47,19 @@ class UserPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     
+    
+    
   }
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('home');
+    }
+    if(this.props.user.userId && this.props.driverId === false){
+      this.props.dispatch({
+        type: "DRIVER_GET",
+        payload: {driver: this.props.user.userId}
+      })
     }
   }
 

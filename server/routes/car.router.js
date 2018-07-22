@@ -5,8 +5,22 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    
+router.post('/driverId', (req, res) => {
+    let personId = req.body.driver
+    console.log(personId)
+    if(req.isAuthenticated()){//in order to post an item, user must be signed in
+        let queryText = `SELECT * from drivers WHERE driver_id = $1;`
+        pool.query(queryText, [personId])
+        .then((result)=>{
+            console.log(result.rows)
+            res.send(result.rows);
+        }).catch((err)=>{
+            console.log(err);
+            res.sendStatus(500)
+        })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 /**
