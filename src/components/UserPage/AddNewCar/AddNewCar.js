@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { USER_ACTIONS } from '../../../redux/actions/userActions';
+
 import Button from 'react-bootstrap/lib/Button';
 
 const mapStateToProps = state => ({
@@ -38,7 +38,7 @@ class AddNewCar extends Component {
     })
   }
   componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    
     
   }
 
@@ -58,18 +58,22 @@ class AddNewCar extends Component {
           
           <h3> add new car</h3>
           <input 
+          value={this.state.model}
           placeholder="model"
           onChange={this.carInput('model')}
           />
           <input 
+           value={this.state.make}
           placeholder="make"
           onChange={this.carInput('make')}
           />
           <input 
+          value={this.state.year}
           placeholder="year"
           onChange={this.carInput('year')}
           />
           <input 
+          value={this.state.miles}
           placeholder="starting miles"
           onChange={this.carInput('miles')}
           />

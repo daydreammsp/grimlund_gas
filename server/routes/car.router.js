@@ -2,9 +2,25 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
+router.post('/cars', (req, res) => {
+    let personId = req.body.driver
+    console.log(personId)
+    if(req.isAuthenticated()){//in order to post an item, user must be signed in
+        let queryText = `SELECT "car_model", "car_make" from cars;`
+        pool.query(queryText, [personId])
+        .then((result)=>{
+            console.log(result.rows)
+            res.send(result.rows);
+        }).catch((err)=>{
+            console.log(err);
+            res.sendStatus(500)
+        })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.post('/driverId', (req, res) => {
     let personId = req.body.driver
     console.log(personId)
@@ -23,9 +39,7 @@ router.post('/driverId', (req, res) => {
     }
 });
 
-/**
- * POST route template
- */
+
 router.post('/post', (req, res) => {
 console.log(req.body)
 let car = req.body
