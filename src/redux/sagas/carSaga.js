@@ -1,5 +1,18 @@
-import { call,put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+
+function* carGet() {
+  
+     try {
+          let cars = yield call(axios.get, '/api/car/cars');
+          console.log('cars',cars.data)
+         yield put({
+             type: 'CAR_DISPLAY',
+             payload: cars.data
+             
+         })
+     } catch (error) {}
+   }
 
 function* driverGet(action) {
    console.log(action.payload)
@@ -18,10 +31,10 @@ function* carPost(action) {
     try {
          yield call(axios.post, '/api/car/post', action.payload);
 
-        // yield put({
-        //     type: 'Cars_GET',
+        yield put({
+            type: 'CAR_GET',
             
-        // })
+        })
     } catch (error) {}
   }
 
@@ -41,6 +54,7 @@ function* carPost(action) {
     yield takeEvery('CAR_POST', carPost);
     yield takeEvery('TRANSACTION_POST', transactionPost);
     yield takeEvery('DRIVER_GET', driverGet);
+    yield takeEvery('CAR_GET', carGet);
     
 }
 export default carSaga;

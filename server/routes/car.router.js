@@ -3,14 +3,12 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.post('/cars', (req, res) => {
-    let personId = req.body.driver
-    console.log(personId)
+router.get('/cars', (req, res) => {
     if(req.isAuthenticated()){//in order to post an item, user must be signed in
-        let queryText = `SELECT "car_model", "car_make" from cars;`
-        pool.query(queryText, [personId])
+        let queryText = `SELECT * from cars;`
+        pool.query(queryText)
         .then((result)=>{
-            console.log(result.rows)
+            
             res.send(result.rows);
         }).catch((err)=>{
             console.log(err);
@@ -23,12 +21,12 @@ router.post('/cars', (req, res) => {
 
 router.post('/driverId', (req, res) => {
     let personId = req.body.driver
-    console.log(personId)
+    
     if(req.isAuthenticated()){//in order to post an item, user must be signed in
         let queryText = `SELECT * from drivers WHERE driver_id = $1;`
         pool.query(queryText, [personId])
         .then((result)=>{
-            console.log(result.rows)
+            
             res.send(result.rows);
         }).catch((err)=>{
             console.log(err);
@@ -41,7 +39,7 @@ router.post('/driverId', (req, res) => {
 
 
 router.post('/post', (req, res) => {
-console.log(req.body)
+
 let car = req.body
 let userId = req.body.userId
 if(req.isAuthenticated()){//in order to post an item, user must be signed in
@@ -53,7 +51,7 @@ if(req.isAuthenticated()){//in order to post an item, user must be signed in
             await client.query('BEGIN') // tells DB to be ready for multiple lines of queries
             let queryText = `INSERT INTO cars ("car_model", "car_make", "car_year", "car_miles") VALUES ($1,$2,$3,$4) RETURNING car_id;`;
              let result1 = await client.query(queryText, [car.model, car.make, car.year, car.miles])
-             console.log(result1.rows[0].car_id)
+             
              let carId = result1.rows[0].car_id
              let queryText2 = `INSERT INTO drivers ("driver_id", "car_id") VALUES ($1,$2);`;
              await client.query(queryText2, [userId, carId])
@@ -78,7 +76,7 @@ if(req.isAuthenticated()){//in order to post an item, user must be signed in
     
 
 router.post('/transactionpost', (req, res) => {
-    console.log(req.body)
+    
 let transaction = req.body
 if(req.isAuthenticated()){//in order to post an item, user must be signed in
     let queryText = `INSERT INTO transactions ("driver_id","city", "state", "car_milage", "price_gallon", "gallons_purchased") VALUES ($1,$2,$3,$4,$5,$6);`

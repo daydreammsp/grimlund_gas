@@ -9,7 +9,8 @@ import Transaction from './Transaction/Transaction';
 
 const mapStateToProps = state => ({
   user: state.user,
-  driverId: state.driverIdGetReducer
+  driverId: state.driverIdGetReducer,
+  cars: state.carsGetReducer
 });
 
 class UserPage extends Component {
@@ -20,7 +21,9 @@ class UserPage extends Component {
   
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    
+    this.props.dispatch({
+      type: "CAR_GET"
+    })
     
     
   }
@@ -38,6 +41,12 @@ class UserPage extends Component {
   }
 
   render() {
+    let cars = this.props.cars.map( (car)=>{
+      return(
+        <h3 key={car.id}>{car.car_model}</h3>
+      )
+    });
+    
     let content = null;
 
     if (this.props.user.userName) {
@@ -50,6 +59,7 @@ class UserPage extends Component {
           </h1>
           <Transaction/>
           <AddNewCar/>
+          {cars}
           <Button
             onClick={this.logout}
           >
