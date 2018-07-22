@@ -51,6 +51,19 @@ if(req.isAuthenticated()){//in order to post an item, user must be signed in
 
 router.post('/transactionpost', (req, res) => {
     console.log(req.body)
+let transaction = req.body
+if(req.isAuthenticated()){//in order to post an item, user must be signed in
+    let queryText = `INSERT INTO transactions ("driver_id","city", "state", "car_milage", "price_gallon", "gallons_purchased") VALUES ($1,$2,$3,$4,$5,$6);`
+    pool.query(queryText, [transaction.driver_id, transaction.city, transaction.state, transaction.milage,transaction.gallonPrice,transaction.gallons_purchased])
+    .then((result)=>{
+        res.sendStatus(201);
+    }).catch((err)=>{
+        console.log(err);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403);
+}
 });
 
 module.exports = router;

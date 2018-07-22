@@ -15,6 +15,7 @@ class UserPage extends Component {
     city:'',
     state:'',
     milage:'',
+    gallonPrice: '',
     gallons_purchased:''
   }
   transactionInput = (inputText) => {
@@ -27,9 +28,11 @@ class UserPage extends Component {
   transactionSubmit = () => { 
     this.props.dispatch({
       type: 'TRANSACTION_POST',
-      payload: {city:this.state.city,
+      payload: {driver_id: 4,
+                city:this.state.city,
                 state:this.state.state,
                 milage:this.state.milage,
+                gallonPrice:this.state.gallonPrice,
                 gallons_purchased:this.state.gallons_purchased,
                 userId:this.props.user.userId}
     });
@@ -83,6 +86,10 @@ class UserPage extends Component {
           <input
           placeholder="gallons_purchased"
           onChange={this.transactionInput('gallons_purchased')}
+          />
+          <input
+          placeholder="Price Per Gallon"
+          onChange={this.transactionInput('gallonPrice')}
           />
           <Button
           onClick={this.transactionSubmit}
