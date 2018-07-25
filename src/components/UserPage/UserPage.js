@@ -6,6 +6,7 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 import Button from 'react-bootstrap/lib/Button';
 import AddNewCar from './AddNewCar/AddNewCar';
 import Transaction from './Transaction/Transaction';
+import RadialNav from '../RadialNav/RadialNav';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -65,6 +66,8 @@ class UserPage extends Component {
           >
             Log Out
           </Button>
+
+          <RadialNav/>
         </div>
       );
     }
