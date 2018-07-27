@@ -11,12 +11,12 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
-
+import NavPage from './components/NavPage/NavPage';
 import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Project Base" />
+    
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -35,6 +35,10 @@ const App = () => (
         <Route
           path="/info"
           component={InfoPage}
+        />
+         <Route
+          path="/navpage"
+          component={NavPage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
