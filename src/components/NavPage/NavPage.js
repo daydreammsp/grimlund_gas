@@ -51,7 +51,7 @@ class NavPage extends Component {
   {!this.state.open1 &&
     <Col xs={12}>
     
-        <Button onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3})}>
+        <Button bsStyle="success" bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3})}>
          Add New Car
         </Button>
         <br />
@@ -69,7 +69,7 @@ class NavPage extends Component {
   {!this.state.open2 &&
   <Row>
     <Col xs={12}>
-    <Button onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3})}>
+    <Button bsStyle="success" bsSize="small" block onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3})}>
           Gas Transaction
         </Button>
         <br />
@@ -87,7 +87,7 @@ class NavPage extends Component {
   {!this.state.open3 &&
     <Row>
     <Col xs={12}>
-    <Button onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1})}>
+    <Button bsStyle="success" bsSize="small" block onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1})}>
             Log Out
         </Button>
         <br />
