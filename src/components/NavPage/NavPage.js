@@ -4,12 +4,16 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import { Button, Grid, Row, Col, Panel  } from 'react-bootstrap';
 import '../NavPage/NavPage.css';
+import Transaction from '../UserPage/Transaction/Transaction';
+import AddNewCar from '../UserPage/AddNewCar/AddNewCar';
+
 
 const mapStateToProps = state => ({
     user: state.user,
     driverId: state.driverIdGetReducer,
     cars: state.carsGetReducer
   });
+
 class NavPage extends Component {
     state={
     open: false,
@@ -40,7 +44,7 @@ class NavPage extends Component {
     
         if (this.props.user.userName) {
           content = (
-            <div>
+            <div className="navBorder">
               
               <Grid className="centered">
   <Row >
@@ -48,17 +52,14 @@ class NavPage extends Component {
     <Col xs={12}>
     
         <Button onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3})}>
-          Click to toggle 1
+         Add New Car
         </Button>
         <br />
         <Panel id="collapsible-panel-example-1" expanded={this.state.open}>
           <Panel.Collapse>
             <Panel.Body>
-                b1
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. Nihil anim keffiyeh
-              helvetica, craft beer labore wes anderson cred nesciunt sapiente
-              ea proident.
+                
+              <AddNewCar/>
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
@@ -69,17 +70,14 @@ class NavPage extends Component {
   <Row>
     <Col xs={12}>
     <Button onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3})}>
-          Click to toggle 2
+          Gas Transaction
         </Button>
         <br />
         <Panel id="collapsible-panel-example-1" expanded={this.state.open21}>
           <Panel.Collapse>
             <Panel.Body>
                 b2
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. Nihil anim keffiyeh
-              helvetica, craft beer labore wes anderson cred nesciunt sapiente
-              ea proident.
+              <Transaction/>
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
@@ -90,16 +88,17 @@ class NavPage extends Component {
     <Row>
     <Col xs={12}>
     <Button onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1})}>
-          Click to toggle 3
+            Log Out
         </Button>
         <br />
         <Panel id="collapsible-panel-example-1" expanded={this.state.open31}>
           <Panel.Collapse>
-            <Panel.Body>b3
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. Nihil anim keffiyeh
-              helvetica, craft beer labore wes anderson cred nesciunt sapiente
-              ea proident.
+            <Panel.Body>
+            <Button
+            onClick={this.logout}
+          >
+            Log Out
+          </Button>
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
