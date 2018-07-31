@@ -21,9 +21,9 @@ router.get('/cars', (req, res) => {
 
 router.post('/driverId', (req, res) => {
     let personId = req.body.driver
-    
-    if(req.isAuthenticated()){//in order to post an item, user must be signed in
-        let queryText = `SELECT * from drivers WHERE driver_id = $1;`
+    // Select * from drivers LEFT JOIN cars on drivers.car_id = cars.car_id;
+    if(req.isAuthenticated()){
+        let queryText = `Select * from drivers LEFT JOIN cars on drivers.car_id = cars.car_id WHERE drivers.driver_id = $1;;`
         pool.query(queryText, [personId])
         .then((result)=>{
             

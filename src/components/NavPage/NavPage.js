@@ -8,6 +8,7 @@ import Transaction from '../UserPage/Transaction/Transaction';
 import AddNewCar from '../UserPage/AddNewCar/AddNewCar';
 
 
+
 const mapStateToProps = state => ({
     user: state.user,
     driverId: state.driverIdGetReducer,
@@ -38,20 +39,24 @@ class NavPage extends Component {
       }
     
       render() {
-        
+        let navBorder = "navBorder"
+        if(this.state.open || this.state.open21 || this.state.open31){
+          navBorder = "navBorder1"
+        }
         
         let content = null;
     
         if (this.props.user.userName) {
           content = (
-            <div className="navBorder">
               
+            <div className={navBorder}>
+             
               <Grid className="centered">
   <Row >
   {!this.state.open1 &&
     <Col xs={12}>
     
-        <Button bsStyle="success" bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3})}>
+        <Button  bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3})}>
          Add New Car
         </Button>
         <br />
@@ -59,7 +64,8 @@ class NavPage extends Component {
           <Panel.Collapse>
             <Panel.Body>
                 
-              <AddNewCar/>
+              <AddNewCar />
+              
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
@@ -69,7 +75,7 @@ class NavPage extends Component {
   {!this.state.open2 &&
   <Row>
     <Col xs={12}>
-    <Button bsStyle="success" bsSize="small" block onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3})}>
+    <Button  bsSize="small" block onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3})}>
           Gas Transaction
         </Button>
         <br />
@@ -87,7 +93,7 @@ class NavPage extends Component {
   {!this.state.open3 &&
     <Row>
     <Col xs={12}>
-    <Button bsStyle="success" bsSize="small" block onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1})}>
+    <Button  bsSize="small" block onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1})}>
             Log Out
         </Button>
         <br />
@@ -110,6 +116,7 @@ class NavPage extends Component {
 
              
             </div>
+            
           );
         }
     
