@@ -41,7 +41,7 @@ class NavPage extends Component {
       render() {
         let navBorder = "navBorder"
         if(this.state.open || this.state.open21 || this.state.open31){
-          navBorder = "navBorder1"
+          navBorder = "navBorderOpen"
         }
         
         let content = null;

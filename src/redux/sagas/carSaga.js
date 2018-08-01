@@ -5,7 +5,7 @@ function* carGet() {
   
      try {
           let cars = yield call(axios.get, '/api/car/cars');
-          console.log('cars',cars.data)
+        //   console.log('cars',cars.data)
          yield put({
              type: 'CAR_DISPLAY',
              payload: cars.data
@@ -15,12 +15,16 @@ function* carGet() {
    }
 
 function* driverGet(action) {
-   console.log(action.payload)
+//    console.log(action.payload)
     try {
          let driverId = yield call(axios.post, '/api/car/driverId', action.payload);
         yield put({
             type: 'DRIVER_ID',
             payload: driverId.data
+            
+        })
+        yield put({
+            type: 'CAR_GET',
             
         })
     } catch (error) {}
