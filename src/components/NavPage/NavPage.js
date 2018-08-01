@@ -41,8 +41,10 @@ class NavPage extends Component {
     
       render() {
         let navBorder = "navBorder"
+        let centered = "centered"
         if(this.state.open || this.state.open21 || this.state.open31 || this.state.open41){
           navBorder = "navBorderOpen"
+          centered = "centeredClicked"
         }
         
         let content = null;
@@ -50,14 +52,15 @@ class NavPage extends Component {
         if (this.props.user.userName) {
           content = (
               
-            <div className={navBorder}>
+            <div >
              
-              <Grid className="centered">
-  <Row >
+              <Grid className={navBorder}>
+              <div className={centered}>
+  <Row>
   {!this.state.open1 &&
-    <Col xs={12}>
+    <Col sm={12}>
     
-        <Button  bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3, open4: !this.state.open4})}>
+        <Button className="btn" bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3, open4: !this.state.open4})}>
          Add New Car
         </Button>
         <br />
@@ -74,7 +77,7 @@ class NavPage extends Component {
   }
   </Row>
   {!this.state.open2 &&
-  <Row>
+  <Row >
     <Col xs={12}>
     <Button  bsSize="small" block onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3, open4: !this.state.open4})}>
           Gas Transaction
@@ -83,7 +86,7 @@ class NavPage extends Component {
         <Panel id="collapsible-panel-example-1" expanded={this.state.open21}>
           <Panel.Collapse>
             <Panel.Body>
-                b2
+              
               <Transaction/>
             </Panel.Body>
           </Panel.Collapse>
@@ -92,7 +95,7 @@ class NavPage extends Component {
   </Row>
   }
   {!this.state.open4 &&
-  <Row>
+  <Row >
     <Col xs={12}>
     <Button  bsSize="small" block onClick={() => this.setState({ open41: !this.state.open41, open1: !this.state.open1, open3: !this.state.open3, open2: !this.state.open2})}>
           Reporting
@@ -110,7 +113,7 @@ class NavPage extends Component {
   </Row>
   }
   {!this.state.open3 &&
-    <Row>
+    <Row >
     <Col xs={12}>
     <Button  bsSize="small" block onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1, open4: !this.state.open4})}>
             Log Out
@@ -130,7 +133,7 @@ class NavPage extends Component {
     </Col>
   </Row>
   }
-  
+  </div>
 </Grid>
 
              
@@ -140,10 +143,11 @@ class NavPage extends Component {
         }
     
         return (
+          
           <div>
-           
             { content }
           </div>
+          
         );
       }
     }

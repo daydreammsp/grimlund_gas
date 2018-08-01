@@ -30,7 +30,7 @@ const App = () => (
         />
         <Route
           path="/user"
-          component={UserPage}
+          component={NavPage}
         />
         <Route
           path="/info"
