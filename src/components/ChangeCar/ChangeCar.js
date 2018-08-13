@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
     cars: state.carsGetReducer
   });
 
-class CurrentUserInfo extends Component {
+class ChangeCar extends Component {
     state={
     userCars:[],
     currentCar:[]
@@ -41,9 +41,16 @@ class CurrentUserInfo extends Component {
                     currentCar: this.state.currentCar,
                 userId: this.props.user.userId}
         })
+        this.updateList()
        
           
          
+    }
+    updateList=()=>{
+        this.props.dispatch({
+            type: "DRIVER_GET",
+            payload: {driver: this.props.user.userId}
+          })
     }
     
     render() {
@@ -71,9 +78,10 @@ class CurrentUserInfo extends Component {
           content = (
               
             <div>
+                
             <DropdownButton
       bsStyle={'default'}
-      title="Right dropup"
+      title="Available Cars"
       dropup
       pullRight
     >
@@ -87,7 +95,7 @@ class CurrentUserInfo extends Component {
       <MenuItem divider /> */}
       {/* <MenuItem eventKey="4">Separated link</MenuItem> */}
     </DropdownButton>
-            {this.state.userCars[0].carMake}
+            
             </div>
             
           );
@@ -101,4 +109,4 @@ class CurrentUserInfo extends Component {
         );
       }
     }
-    export default connect(mapStateToProps)(CurrentUserInfo);
+    export default connect(mapStateToProps)(ChangeCar);

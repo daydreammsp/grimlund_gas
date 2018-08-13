@@ -28,7 +28,8 @@ class AddNewCar extends Component {
                 make:this.state.make,
                 year:this.state.year,
                 miles:this.state.miles,
-                userId:this.props.user.userId}
+                userId:this.props.user.userId
+                }
     });
     this.setState({
       model: '',
@@ -36,7 +37,15 @@ class AddNewCar extends Component {
       year: '',
       miles: ''
     })
+    this.carUpdate()
   }
+  carUpdate=()=>{
+    this.props.dispatch({
+      type: "DRIVER_GET",
+      payload: {driver: this.props.user.userId}
+    })
+  }
+  
   componentDidMount() {
     
     

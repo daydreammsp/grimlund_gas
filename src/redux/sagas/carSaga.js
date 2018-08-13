@@ -39,6 +39,7 @@ function* carPost(action) {
             type: 'CAR_GET'
             
         })
+        
     } catch (error) {}
   }
 
