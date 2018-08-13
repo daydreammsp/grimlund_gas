@@ -53,12 +53,23 @@ function* carPost(action) {
         // })
     } catch (error) {}
   }
+  function* currentCarChange(action) {
+    console.log('car saga', action.payload)
+    try {
+         yield call(axios.post, '/api/car/currentcarchange', action.payload);
 
+        yield put({
+            type: 'CAR_GET',
+            
+        })
+    } catch (error) {}
+  }
   function* carSaga() {
     yield takeEvery('CAR_POST', carPost);
     yield takeEvery('TRANSACTION_POST', transactionPost);
     yield takeEvery('DRIVER_GET', driverGet);
     yield takeEvery('CAR_GET', carGet);
+    yield takeEvery('CURRENT_CAR_CHANGE', currentCarChange);
     
 }
 export default carSaga;

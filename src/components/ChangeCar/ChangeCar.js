@@ -31,13 +31,22 @@ class CurrentUserInfo extends Component {
       }
     
       
-    
-      render() {
+    changeCar = (car) => {
+        console.log(car)
+        this.props.dispatch({
+            type: 'CURRENT_CAR_CHANGE',
+            payload: car
+        })
+    }
+
+    render() {
         
         this.state.userCars = this.props.driverId && this.props.driverId.map( (car)=>{
             return(
                 
-                <MenuItem eventKey={car.id}><span>{car.car_model} </span> {car.car_year}</MenuItem>
+                <MenuItem eventKey={car.id}
+                onClick={()=>this.changeCar(car)}
+                ><span>{car.car_model} </span> {car.car_year}</MenuItem>
                 
                
             )
@@ -69,7 +78,7 @@ class CurrentUserInfo extends Component {
         Active Item
       </MenuItem>
       <MenuItem divider /> */}
-      <MenuItem eventKey="4">Separated link</MenuItem>
+      {/* <MenuItem eventKey="4">Separated link</MenuItem> */}
     </DropdownButton>
             {this.state.userCars[0].carMake}
             </div>
