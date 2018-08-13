@@ -7,7 +7,8 @@ import '../NavPage/NavPage.css';
 import Transaction from '../UserPage/Transaction/Transaction';
 import AddNewCar from '../UserPage/AddNewCar/AddNewCar';
 import Reporting from '../Reporting/Reporting';
-
+import CurrentUserInfo from '../CurrentUserInfo/CurrentUserInfo';
+import ChangeCar from '../ChangeCar/ChangeCar';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -52,8 +53,8 @@ class NavPage extends Component {
         if (this.props.user.userName) {
           content = (
               
-            <div >
-             
+            <div>
+             <CurrentUserInfo/>
               <Grid className={navBorder}>
               <div className={centered}>
   <Row>
@@ -61,7 +62,7 @@ class NavPage extends Component {
     <Col sm={12}>
     
         <Button className="btn" bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3, open4: !this.state.open4})}>
-         Add New Car
+         Cars
         </Button>
         <br />
         <Panel id="collapsible-panel-example-1" expanded={this.state.open}>
@@ -69,7 +70,7 @@ class NavPage extends Component {
             <Panel.Body>
                 
               <AddNewCar />
-              
+              <ChangeCar/>
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
@@ -80,7 +81,7 @@ class NavPage extends Component {
   <Row >
     <Col xs={12}>
     <Button  bsSize="small" block onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3, open4: !this.state.open4})}>
-          Gas Transaction
+          Transaction
         </Button>
         <br />
         <Panel id="collapsible-panel-example-1" expanded={this.state.open21}>
