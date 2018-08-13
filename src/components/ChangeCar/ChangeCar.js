@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Button, Grid, Row, Col, Panel, DropdownButton, MenuItem  } from 'react-bootstrap';
-import '../CurrentUserInfo/CurrentUserInfo.css';
+import '../ChangeCar/ChangeCar.css';
 
 
 
@@ -29,17 +29,17 @@ class CurrentUserInfo extends Component {
         }
         
       }
-     
+    
+      
     
       render() {
         
         this.state.userCars = this.props.driverId && this.props.driverId.map( (car)=>{
             return(
-                {carId: car.id,
-                  carCurrent: car.current_car,
-                carModel: car.car_model, 
-                carMake: car.car_make,
-                carYear: car.car_year}
+                
+                <MenuItem eventKey={car.id}><span>{car.car_model} </span> {car.car_year}</MenuItem>
+                
+               
             )
         });
      
@@ -56,17 +56,19 @@ class CurrentUserInfo extends Component {
               
             <div>
             <DropdownButton
-    //   bsStyle={title.toLowerCase()}
-      title="Your Cars"
-      key='1'
-      id={`dropdown-basic-`}
+      bsStyle={'default'}
+      title="Right dropup"
+      dropup
+      pullRight
     >
+    {this.state.userCars}
+    {/* {this.state.userCars} */}
       {/* <MenuItem eventKey="1">Action</MenuItem>
       <MenuItem eventKey="2">Another action</MenuItem>
       <MenuItem eventKey="3">
         Active Item
-      </MenuItem> */}
-      <MenuItem divider />
+      </MenuItem>
+      <MenuItem divider /> */}
       <MenuItem eventKey="4">Separated link</MenuItem>
     </DropdownButton>
             {this.state.userCars[0].carMake}
