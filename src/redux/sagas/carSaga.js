@@ -36,7 +36,7 @@ function* carPost(action) {
          yield call(axios.post, '/api/car/post', action.payload);
 
         yield put({
-            type: 'CAR_GET',
+            type: 'CAR_GET'
             
         })
     } catch (error) {}
@@ -46,22 +46,16 @@ function* carPost(action) {
     console.log('transactions saga', action.payload)
     try {
          yield call(axios.post, '/api/car/transactionpost', action.payload);
-
-        // yield put({
-        //     type: 'Cars_GET',
-            
-        // })
+        
+       
     } catch (error) {}
   }
   function* currentCarChange(action) {
     console.log('car saga', action.payload)
     try {
          yield call(axios.post, '/api/car/currentcarchange', action.payload);
-
-        yield put({
-            type: 'CAR_GET',
-            
-        })
+         
+        
     } catch (error) {}
   }
   function* carSaga() {

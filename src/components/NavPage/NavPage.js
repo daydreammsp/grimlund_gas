@@ -10,10 +10,12 @@ import Reporting from '../Reporting/Reporting';
 import CurrentUserInfo from '../CurrentUserInfo/CurrentUserInfo';
 import ChangeCar from '../ChangeCar/ChangeCar';
 
+
 const mapStateToProps = state => ({
     user: state.user,
     driverId: state.driverIdGetReducer,
-    cars: state.carsGetReducer
+    cars: state.carsGetReducer,
+    toggleInfo: state.toggleInfoReducer
   });
 
 class NavPage extends Component {
@@ -22,7 +24,9 @@ class NavPage extends Component {
     open1: false,
     open2: false,
     open3: false,
-    open4: false
+    open4: false,
+    open21: false,
+    
     }
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -39,8 +43,22 @@ class NavPage extends Component {
         this.props.dispatch(triggerLogout());
         // this.props.history.push('home');
       }
-    
+      // open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3, open4: !this.state.open4
+      toggleMenu = (a1,b1,a2,b2,a3,b3,a4,b4)=>{
+        this.setState({[a1]: b1, 
+                      [a2]: b2,
+                      [a3]: b3,
+                      [a4]: b4})
+          this.cardis()
+      }
+      cardis =()=>{
+        this.props.dispatch({
+            type: "DRIVER_GET",
+            payload: {driver: this.props.user.userId}
+          })
+      }  
       render() {
+        
         let navBorder = "navBorder"
         let centered = "centered"
         if(this.state.open || this.state.open21 || this.state.open31 || this.state.open41){
@@ -54,15 +72,20 @@ class NavPage extends Component {
           content = (
               
             <div>
-             <CurrentUserInfo/>
+              <CurrentUserInfo/>
               <Grid className={navBorder}>
               <div className={centered}>
   <Row>
   {!this.state.open1 &&
     <Col sm={12}>
     
-        <Button className="btn" bsSize="small" block onClick={() => this.setState({ open: !this.state.open, open2: !this.state.open2, open3: !this.state.open3, open4: !this.state.open4})}>
+        <Button className="btn" bsSize="small" block 
+        onClick={()=>this.toggleMenu("open",!this.state.open, 
+                                    "open2", !this.state.open2, 
+                                    "open3", !this.state.open3,
+                                    "open4",!this.state.open4)}>
          Cars
+              
         </Button>
         <br />
         <Panel id="collapsible-panel-example-1" expanded={this.state.open}>
@@ -80,7 +103,11 @@ class NavPage extends Component {
   {!this.state.open2 &&
   <Row >
     <Col xs={12}>
-    <Button  bsSize="small" block onClick={() => this.setState({ open21: !this.state.open21, open1: !this.state.open1, open3: !this.state.open3, open4: !this.state.open4})}>
+    <Button  bsSize="small" block 
+    onClick={()=>this.toggleMenu( "open21", !this.state.open21, 
+                                  "open1", !this.state.open1, 
+                                  "open3", !this.state.open3, 
+                                  "open4", !this.state.open4)}>
           Transaction
         </Button>
         <br />
@@ -98,7 +125,11 @@ class NavPage extends Component {
   {!this.state.open4 &&
   <Row >
     <Col xs={12}>
-    <Button  bsSize="small" block onClick={() => this.setState({ open41: !this.state.open41, open1: !this.state.open1, open3: !this.state.open3, open2: !this.state.open2})}>
+    <Button  bsSize="small" block 
+            onClick={()=>this.toggleMenu( "open41", !this.state.open41, 
+                                          "open1",!this.state.open1, 
+                                          "open3", !this.state.open3, 
+                                          "open2", !this.state.open2)}>
           Reporting
         </Button>
         <br />
@@ -116,7 +147,11 @@ class NavPage extends Component {
   {!this.state.open3 &&
     <Row >
     <Col xs={12}>
-    <Button  bsSize="small" block onClick={() => this.setState({ open31: !this.state.open31, open2: !this.state.open2, open1: !this.state.open1, open4: !this.state.open4})}>
+    <Button  bsSize="small" block 
+              onClick={()=>this.toggleMenu( "open31", !this.state.open31,
+                                             "open2", !this.state.open2, 
+                                             "open1", !this.state.open1, 
+                                             "open4", !this.state.open4)}>
             Log Out
         </Button>
         <br />

@@ -20,6 +20,13 @@ class CurrentUserInfo extends Component {
     }
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        if(this.props.user.userId && this.props.driverId === false){
+          this.props.dispatch({
+            type: "DRIVER_GET",
+            payload: {driver: this.props.user.userId}
+          })
+        }
+        
         
       }
     
@@ -42,7 +49,7 @@ class CurrentUserInfo extends Component {
                 carYear: car.car_year}
             )
         });
-     
+
           let sortCars = (car => car.carCurrent === "true");
            let currentCar = this.state.userCars && this.state.userCars.filter(sortCars);
           this.state.currentCar = currentCar

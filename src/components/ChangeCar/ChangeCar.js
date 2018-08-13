@@ -7,6 +7,7 @@ import '../ChangeCar/ChangeCar.css';
 
 
 
+
 const mapStateToProps = state => ({
     user: state.user,
     driverId: state.driverIdGetReducer,
@@ -37,10 +38,14 @@ class CurrentUserInfo extends Component {
             type: 'CURRENT_CAR_CHANGE',
             payload: {carId:car.id,
                      userId: this.props.user.userId,
-                    currentCar: this.state.currentCar}
+                    currentCar: this.state.currentCar,
+                userId: this.props.user.userId}
         })
+       
+          
+         
     }
-
+    
     render() {
         
         this.state.userCars = this.props.driverId && this.props.driverId.map( (car)=>{
