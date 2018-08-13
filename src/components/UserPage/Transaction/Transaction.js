@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/lib/Button';
 
 const mapStateToProps = state => ({
   user: state.user,
-  driverId: state.driverIdGetReducer
+    driverId: state.driverIdGetReducer,
+    cars: state.carsGetReducer
 });
 
 class Transaction extends Component {
@@ -14,7 +15,8 @@ class Transaction extends Component {
     state:'',
     milage:'',
     gallonPrice: '',
-    gallons_purchased:''
+    gallons_purchased:'',
+    currentCar: []
   }
   transactionInput = (inputText) => {
     return (event) => {
@@ -23,23 +25,25 @@ class Transaction extends Component {
       });
     }
   }
-  transactionSubmit = () => { 
+  transactionSubmit = (currentCar) => { 
+    
     this.props.dispatch({
       type: 'TRANSACTION_POST',
-      payload: {driver_id: this.props.driverId[0].id,
+      payload: {car_id:currentCar,
                 city:this.state.city,
                 state:this.state.state,
                 milage:this.state.milage,
                 gallonPrice:this.state.gallonPrice,
                 gallons_purchased:this.state.gallons_purchased,
-                userId:this.props.user.userId}
+                }
     });
     this.setState({
       city: '',
       state: '',
       milage: '',
       gallonPrice:'',
-      gallons_purchased: ''
+      gallons_purchased:'',
+      currentCar: []
     })
   }
   componentDidMount() {
@@ -59,6 +63,15 @@ class Transaction extends Component {
   
 
   render() {
+    let userCars = this.props.driverId && this.props.driverId.map( (car)=>{
+      return(
+          car
+      )
+  });
+  
+    let sortCars = (car => car.current_car === "true");
+     let currentCar = userCars && userCars.filter(sortCars);
+
     let content = null;
 
     if (this.props.user.userName) {
@@ -81,7 +94,7 @@ class Transaction extends Component {
           onChange={this.transactionInput('milage')}
           />
           <input
-          value={this.state.gallons_purchase}
+          value={this.state.gallons_purchased}
           placeholder="gallons_purchased"
           onChange={this.transactionInput('gallons_purchased')}
           />
@@ -91,7 +104,7 @@ class Transaction extends Component {
           onChange={this.transactionInput('gallonPrice')}
           />
           <Button
-          onClick={this.transactionSubmit}
+          onClick={()=>this.transactionSubmit(currentCar[0].car_id)}
           >
             Submit
             </Button>

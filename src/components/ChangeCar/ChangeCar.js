@@ -5,9 +5,6 @@ import { Button, Grid, Row, Col, Panel, DropdownButton, MenuItem  } from 'react-
 import '../ChangeCar/ChangeCar.css';
 
 
-
-
-
 const mapStateToProps = state => ({
     user: state.user,
     driverId: state.driverIdGetReducer,
