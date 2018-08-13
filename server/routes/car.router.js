@@ -94,20 +94,46 @@ if(req.isAuthenticated()){//in order to post an item, user must be signed in
 
 router.post('/currentcarchange', (req, res) => {
     
-    let carChange = req.body
-    console.log(carChange)
-    // if(req.isAuthenticated()){//in order to post an item, user must be signed in
-    //     let queryText = `INSERT INTO transactions ("driver_id","city", "state", "car_milage", "price_gallon", "gallons_purchased") VALUES ($1,$2,$3,$4,$5,$6);`
-    //     pool.query(queryText, [transaction.driver_id, transaction.city, transaction.state, transaction.milage,transaction.gallonPrice,transaction.gallons_purchased])
-    //     .then((result)=>{
-    //         res.sendStatus(201);
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //         res.sendStatus(500)
-    //     })
-    // } else {
-    //     res.sendStatus(403);
-    // }
+    let carId = req.body.carId
+    let userId = req.body.userId
+    let currentCar = req.body.current_car
+    console.log(carId)
+
+    if(req.isAuthenticated()){//in order to post an item, user must be signed in
+    (async () => {
+        //creates async function
+        const client = await pool.connect();
+        // await will wait for a return on the fiven function and then do something
+        try {
+            await client.query('BEGIN') // tells DB to be ready for multiple lines of queries
+            let queryText = `UPDATE drivers 
+            SET current_car = 'false'
+            WHERE driver_id = $1 AND current_car = 'true';`;
+             await client.query(queryText, [userId])
+             
+             let queryText2 = `UPDATE drivers 
+             SET current_car = 'true'
+             WHERE id = $1;`;
+             await client.query(queryText2, [carId])
+            
+             await client.query('COMMIT');
+                res.send('ok')
+            } catch (error) {
+                console.log('ROLLBACK', error);
+                await client.query('ROLLBACK');
+                throw error;
+            } finally {
+                client.release();
+                //will end connection to database
+            };// end try/catch
+        })().catch((error) => {
+            console.log('CATCH error', error);
+            res.sendStatus(500);
+        })//end async
+    } else {
+        res.sendStatus(403)
+    };//end if/else
+     
     });
 
 module.exports = router;

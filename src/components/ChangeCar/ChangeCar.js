@@ -35,7 +35,9 @@ class CurrentUserInfo extends Component {
         console.log(car)
         this.props.dispatch({
             type: 'CURRENT_CAR_CHANGE',
-            payload: car
+            payload: {carId:car.id,
+                     userId: this.props.user.userId,
+                    currentCar: this.state.currentCar}
         })
     }
 
