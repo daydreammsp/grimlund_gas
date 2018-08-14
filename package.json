@@ -23,6 +23,7 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-geolocation": "^1.0.4",
     "react-motion-menu": "^0.4.4",
     "react-radial": "^1.0.8",
     "react-radial-menu": "^0.1.0",
