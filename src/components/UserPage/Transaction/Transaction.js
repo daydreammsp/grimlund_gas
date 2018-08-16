@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/lib/Button';
 import Geolocation from 'react-geolocation';
+import MapContainer from '../../GoogleMap/GoogleMap';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -107,24 +108,25 @@ class Transaction extends Component {
             Submit
             </Button>
             <Geolocation
-                render={({
-                  fetchingPosition,
-                  position: { coords: { latitude, longitude } = {} } = {},
-                  error,
-                  getCurrentPosition
-                }) =>
-                  <div>
-                    <button onClick={getCurrentPosition}>Get Position</button>
-                    {error &&
-                      <div>
-                        {error.message}
-                      </div>}
-                    <pre>
-                      latitude: {latitude}
-                      longitude: {longitude}
-                    </pre>
-                  </div>}
-              />
+    render={({
+      fetchingPosition,
+      position: { coords: { latitude, longitude } = {} } = {},
+      error,
+      getCurrentPosition
+    }) =>
+      <div>
+        <button onClick={getCurrentPosition}>Get Position</button>
+        {error &&
+          <div>
+            {error.message}
+          </div>}
+        <pre>
+          latitude: {latitude}
+          longitude: {longitude}
+        </pre>
+      </div>}
+  />
+  <MapContainer />
         </div>
       );
     }
