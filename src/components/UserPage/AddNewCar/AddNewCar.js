@@ -59,37 +59,39 @@ class AddNewCar extends Component {
 
 
   render() {
+    let carInput = (
+      <div>
+      <h3> add new car</h3>
+      <input 
+      value={this.state.model}
+      placeholder="model"
+      onChange={this.carInput('model')}
+      />
+      <input 
+       value={this.state.make}
+      placeholder="make"
+      onChange={this.carInput('make')}
+      />
+      <input 
+      value={this.state.year}
+      placeholder="year"
+      onChange={this.carInput('year')}
+      />
+      <input 
+      value={this.state.miles}
+      placeholder="starting miles"
+      onChange={this.carInput('miles')}
+      />
+      <Button
+      onClick={this.carSubmit}
+      >submit</Button>
+      </div>
+    )
     let content = null;
 
     if (this.props.user.userName) {
       content = (
-        <div>
-          
-          <h3> add new car</h3>
-          <input 
-          value={this.state.model}
-          placeholder="model"
-          onChange={this.carInput('model')}
-          />
-          <input 
-           value={this.state.make}
-          placeholder="make"
-          onChange={this.carInput('make')}
-          />
-          <input 
-          value={this.state.year}
-          placeholder="year"
-          onChange={this.carInput('year')}
-          />
-          <input 
-          value={this.state.miles}
-          placeholder="starting miles"
-          onChange={this.carInput('miles')}
-          />
-          <Button
-          onClick={this.carSubmit}
-          >submit</Button>
-        </div>
+       carInput
       );
     }
 
