@@ -107,7 +107,7 @@ class Transaction extends Component {
           >
             Submit
             </Button>
-            <Geolocation
+            {/* <Geolocation
     render={({
       fetchingPosition,
       position: { coords: { latitude, longitude } = {} } = {},
@@ -126,7 +126,7 @@ class Transaction extends Component {
         </pre>
       </div>}
   />
-  <MapContainer />
+  <MapContainer /> */}
         </div>
       );
     }
