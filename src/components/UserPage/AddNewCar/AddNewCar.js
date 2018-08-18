@@ -107,6 +107,7 @@ class AddNewCar extends Component {
         <div>
           {toggleButton}
        {this.state.inputToggle && carInput}
+       
        </div>
       );
     }

@@ -50,6 +50,7 @@ class NavPage extends Component {
                       [a3]: b3,
                       [a4]: b4})
           this.cardis()
+          
       }
       cardis =()=>{
         this.props.dispatch({
@@ -57,6 +58,8 @@ class NavPage extends Component {
             payload: {driver: this.props.user.userId}
           })
       }  
+
+      
       render() {
         
         let navBorder = "navBorder"
@@ -91,7 +94,7 @@ class NavPage extends Component {
         <Panel id="collapsible-panel-example-1" expanded={this.state.open}>
           <Panel.Collapse>
             <Panel.Body>
-                
+           
               <AddNewCar />
               <ChangeCar/>
             </Panel.Body>

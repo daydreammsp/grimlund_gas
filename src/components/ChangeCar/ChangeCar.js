@@ -4,6 +4,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Button, Grid, Row, Col, Panel, DropdownButton, MenuItem  } from 'react-bootstrap';
 import '../ChangeCar/ChangeCar.css';
 
+let carChangeDiv= "carChange"
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -39,9 +40,7 @@ class ChangeCar extends Component {
                 userId: this.props.user.userId}
         })
         this.updateList()
-       
-          
-         
+          carChangeDiv = "carChangeClicked"
     }
     updateList=()=>{
         this.props.dispatch({
@@ -51,6 +50,7 @@ class ChangeCar extends Component {
     }
     
     render() {
+     
         
         this.state.userCars = this.props.driverId && this.props.driverId.map( (car)=>{
             return(
@@ -63,9 +63,6 @@ class ChangeCar extends Component {
             )
         });
      
-          let sortCars = (car => car.carCurrent === "true");
-           let currentCar = this.state.userCars && this.state.userCars.filter(sortCars);
-          this.state.currentCar = currentCar
         
         
         let content = null;
@@ -74,25 +71,19 @@ class ChangeCar extends Component {
           
           content = (
               
-            <div>
+            <div className={carChangeDiv}>
                 
             <DropdownButton
       bsStyle={'default'}
       title="Available Cars"
-      dropup
+      
       pullRight
     >
     {this.state.userCars}
-    {/* {this.state.userCars} */}
-      {/* <MenuItem eventKey="1">Action</MenuItem>
-      <MenuItem eventKey="2">Another action</MenuItem>
-      <MenuItem eventKey="3">
-        Active Item
-      </MenuItem>
-      <MenuItem divider /> */}
-      {/* <MenuItem eventKey="4">Separated link</MenuItem> */}
+    
     </DropdownButton>
-            
+    {/* <h4>{currentCar}</h4> */}
+    
             </div>
             
           );
