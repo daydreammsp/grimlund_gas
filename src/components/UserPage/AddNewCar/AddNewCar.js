@@ -12,7 +12,8 @@ class AddNewCar extends Component {
     model:'',
     make:'',
     year:'',
-    miles:''
+    miles:'',
+    inputToggle: false
   }
   carInput = (inputText) => {
     return (event) => {
@@ -57,8 +58,20 @@ class AddNewCar extends Component {
     }
   }
 
+  toggle=()=>{
+    this.setState({
+      inputToggle: !this.state.inputToggle
+    })
+  }
 
   render() {
+    let toggleButton = (
+      <Button
+      onClick={this.toggle}
+      >
+        Add New Car
+      </Button>
+    )
     let carInput = (
       <div>
       <h3> add new car</h3>
@@ -91,7 +104,10 @@ class AddNewCar extends Component {
 
     if (this.props.user.userName) {
       content = (
-       carInput
+        <div>
+          {toggleButton}
+       {this.state.inputToggle && carInput}
+       </div>
       );
     }
 
