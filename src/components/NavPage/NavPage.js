@@ -75,9 +75,10 @@ class NavPage extends Component {
           content = (
               
             <div>
-              <CurrentUserInfo/>
+              
               <Grid className={navBorder}>
               <div className={centered}>
+              <CurrentUserInfo/>
   <Row>
   {!this.state.open1 &&
     <Col sm={12}>

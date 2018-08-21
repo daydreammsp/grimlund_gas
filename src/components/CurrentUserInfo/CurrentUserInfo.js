@@ -62,8 +62,9 @@ class CurrentUserInfo extends Component {
           content = (
               
             <div className="headerText">
-             <h3>Driver: {this.props.user.userName}</h3>
-            <span>
+             <strong>Driver: </strong>
+             {this.props.user.userName}
+            <span><br></br>
             <strong>{this.state.currentCar[0].carModel} </strong>
             {this.state.currentCar[0].carMake}
             <strong> {this.state.currentCar[0].carYear}</strong>

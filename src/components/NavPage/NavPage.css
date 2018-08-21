@@ -13,7 +13,7 @@
     transform: translate(-50%, -50%);
     transition:  .2s; */
    margin: 50% auto;
-    
+   
   }
   .centeredClicked {
     /* background-color: rgba(250, 235, 215, 0.151);
@@ -32,7 +32,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 150px;
-    height: 400px;
+    height: 450px;
     border-top:    0px solid  #ff0;
     border-right:  5px solid rgba(0, 0, 0, 0.20);
     border-bottom: 0px dotted #f00;
@@ -57,13 +57,15 @@
     border-right:  0px solid rgba(0, 0, 0, 0.20);
     border-bottom: 0px dotted #f00;
     border-left:   0px solid rgba(0, 0, 0, 0.20);
-    width: 100%;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    width: 80%;
     height: 100%;
+    transition:  .2s;
   }
 
   .menuBackground{
     background-color: rgba(250, 235, 215, 0.151)
   }
-
+  
   
   
